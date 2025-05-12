@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wohngut</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="#home">Hauptmenü</a></li>
+            <li><a href="#wohngesellschaften">Argenturen</a></li>
+            <li><a href="#ueber-uns">Über uns</a></li>
+            <li><a href="#footer">Kontakt</a></li>
+          </ul>
+        </nav>
+      </header>
+    <h1>Wohngut – Faire Mieten. Transparent. Einkommensbasiert.</h1>
+<p>
+Wohnen darf kein Luxus sein. Doch für viele bedeutet die Wohnungssuche: hohe Mietkosten, beengte Verhältnisse oder unsichere Wohnlagen.  
+Wohngut setzt hier an. In Zusammenarbeit mit gemeinnützigen Wohnorganisationen ermöglichen wir eine faire und transparente Berechnung deiner Mietkosten – basierend auf deinem Einkommen.  
+Unsere Plattform unterstützt dich nicht nur bei der Kalkulation, sondern stellt auch den Kontakt zu passenden Wohnanbietern her.  
+So schaffen wir gemeinsam mehr Wohnraum – bezahlbar und gerecht.
+</p>
+
+<section>
+  <h2>Berechne deine individuellen Mietkosten</h2>
+
+  <form id="priceCalculator">
+      <label for="income">Bruttoeinkommen (Monat):</label><br>
+      <input type="number" id="income" name="income" required><br>
+
+      <label for="children">Anzahl der Kinder:</label><br>
+      <select id="children" name="children">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4 oder mehr</option>
+      </select><br>
+
+      <label for="soleEarner">Bist du Alleinverdiener?</label><br>
+      <select id="soleEarner" name="soleEarner">
+          <option value="0">Nein</option>
+          <option value="1">Ja</option>
+      </select><br>
+
+      <label for="location">Standortfaktor:</label><br>
+      <select id="location" name="location">
+          <option value="0.8">Ländlich (80%)</option>
+          <option value="0.9">Kleinstadt (90%)</option>
+          <option value="1.0" selected>Stadt (100%)</option>
+          <option value="1.1">Großstadt (110%)</option>
+          <option value="1.2">Metropole (120%)</option>
+      </select><br>
+
+      <label for="specialCircumstances">Besondere Umstände:</label><br>
+      <select id="specialCircumstances" name="specialCircumstances">
+          <option value="0">Keine</option>
+          <option value="1">Behinderung/Erkrankung</option>
+          <option value="1">Student</option>
+          <option value="1">Pensionist</option>
+          <option value="1">Alleinerziehend</option>
+      </select><br>
+
+      <button type="button" onclick="calculatePrice()">Berechnen</button>
+  </form>
+
+  <h3 id="result"></h3>
+</section>
+
+<section id="wohngesellschaften" class="agencies-section">
+  <h2>Unsere Partner</h2>
+  <div class="agencies-grid">
+    <a href="https://www.gswb.at" target="_blank" class="agency-card">
+      <div class="agency-image">
+        <img src="gswbw.jpg" alt="GSWB Logo">
+      </div>
+      <div class="agency-info">
+        <h3>GSWB – Gemeinnützige Salzburger Wohnbaugesellschaft mbH</h3>
+        <p>Eine der bekanntesten gemeinnützigen Wohnbaugesellschaften in Salzburg. Bietet leistbaren Wohnraum, Miet- und Eigentumswohnungen zu fairen Preisen mit Fokus auf soziale Verantwortung und Nachhaltigkeit.</p>
+      </div>
+    </a>
+
+    <a href="https://www.die-salzburg.at" target="_blank" class="agency-card">
+      <div class="agency-image">
+        <img src="salzburgw.jpg" alt="die salzburg Logo">
+      </div>
+      <div class="agency-info">
+        <h3>die salzburg – Gemeinnützige Wohnbaugenossenschaft</h3>
+        <p>Eine der größten gemeinnützigen Wohnbaugesellschaften im Land Salzburg. Bietet eine breite Palette an leistbaren Mietwohnungen mit Fokus auf wirtschaftliche und soziale Nachhaltigkeit.</p>
+      </div>
+    </a>
+
+    <a href="https://www.vws.at" target="_blank" class="agency-card">
+      <div class="agency-image">
+        <img src="wohnbauw.jpg" alt="VSW Logo">
+      </div>
+      <div class="agency-info">
+        <h3>VSW – Verein für Siedlungs- und Wohnbau</h3>
+        <p>Konzentriert sich auf sozialen Wohnbau in Salzburg. Errichtet Miet- und Eigentumswohnungen zu fairen Preisen mit starker Vernetzung zu den Gemeinden und Entwicklung von Wohnanlagen in verschiedenen Regionen.</p>
+      </div>
+    </a>
+
+    <a href="https://www.shb.at" target="_blank" class="agency-card">
+      <div class="agency-image">
+        <img src="heimatw.jpg" alt="SHB Logo">
+      </div>
+      <div class="agency-info">
+        <h3>SHB – Salzburger Wohnbaugesellschaft mbH</h3>
+        <p>Wichtiger Akteur im Bereich des gemeinnützigen Wohnbaus in Salzburg. Bekannt für qualitativ hochwertige und nachhaltig geplante Wohnanlagen.</p>
+      </div>
+    </a>
+
+    <a href="https://www.wohnen-in-salzburg.at" target="_blank" class="agency-card">
+      <div class="agency-image">
+        <img src="berglandw.jpg" alt="Wohnbau-Genossenschaft Bergland Logo">
+      </div>
+      <div class="agency-info">
+        <h3>Wohnbau-Genossenschaft Bergland</h3>
+        <p>Eine der führenden Wohnbaugenossenschaften in Salzburg, die sich auf nachhaltigen und sozialen Wohnbau konzentriert. Bietet qualitativ hochwertige Wohnungen zu fairen Preisen mit besonderem Fokus auf Gemeinschaft und Lebensqualität.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="ueber-uns" class="about-section">
+  <h2>Über uns</h2>
+  <div class="about-content">
+    <p>
+      Wir sind eine Gruppe von engagierten Studenten, die an einem sozialen Projekt arbeiten, das die Idee von einkommensabhängigen Mietpreismodellen in den Mittelpunkt stellt. Unsere Vision ist es, die Mietpreise an die finanziellen Möglichkeiten der Menschen anzupassen und so eine gerechtere Wohnsituation zu schaffen. Was wäre, wenn wir es ermöglichen könnten, dass jeder, basierend auf seinem Einkommen, faire und transparente Mietpreise zahlen kann?
+    </p>
+    <p>
+      Unsere Initiative basiert auf dem Prinzip der sozialen Gerechtigkeit und einem tiefen Verständnis für die Herausforderungen, die viele Menschen bei der Wohnungssuche und der Mietbelastung erfahren. Wir glauben, dass Wohnen kein Luxus sein sollte, sondern ein Grundrecht für alle.
+    </p>
+
+    <h3>Team</h3>
+    <div class="team-grid">
+      <div class="team-member">
+        <h4>Ahmet Özcan</h4>
+        <p>Projektleiter und Entwickler, verantwortlich für die technische Umsetzung und die Algorithmen.</p>
+      </div>
+      <div class="team-member">
+        <h4>Simon Eppinger</h4>
+        <p>Kommunikationsexperte, verantwortlich für die strategische Ausrichtung und das Marketing.</p>
+      </div>
+      <div class="team-member">
+        <h4>Filip Jodzic</h4>
+        <p>Designer, verantwortlich für das Benutzererlebnis und das visuelle Design der Plattform.</p>
+      </div>
+      <div class="team-member">
+        <h4>Raffael Kaser</h4>
+        <p>Finanzexperte, zuständig für die Berechnungsmodelle und die finanziellen Aspekte des Projekts.</p>
+      </div>
+      <div class="team-member">
+        <h4>Andreas Koch</h4>
+        <p>Mentor, unterstützt uns mit wertvollen Erfahrungen und strategischen Ratschlägen.</p>
+      </div>
+    </div>
+
+    <p class="mission-statement">
+      Unser Ziel ist es, eine gerechtere und transparentere Lösung für Wohnkosten zu entwickeln, die langfristig positive Auswirkungen auf die Gesellschaft hat. Wir setzen auf Zusammenarbeit und innovative Lösungen, um ein soziales System zu schaffen, das den Bedürfnissen aller gerecht wird.
+    </p>
+  </div>
+</section>
+
+<footer id="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Kontakt</h3>
+            <p>E-Mail: <a href="mailto:ahmetzcan@outlook.com">ahmetzcan@outlook.com</a></p>
+            <p>Telefon: +43 123 456 789</p>
+            <p>Adresse: Josef-Resselstraße 20</p>
+            <p>5020 Salzburg, Österreich</p>
+        </div>
+        <div class="footer-section">
+            <h3>Öffnungszeiten</h3>
+            <p>Montag - Freitag: 9:00 - 17:00 Uhr</p>
+            <p>Samstag - Sonntag: Geschlossen</p>
+        </div>
+        <div class="footer-section">
+            <h3>Social Media</h3>
+            <p>Facebook: <a href="#">Wohngut</a></p>
+            <p>Instagram: <a href="#">@wohngut</a></p>
+            <p>LinkedIn: <a href="#">Wohngut</a></p>
+        </div>
+    </div>
+    <p class="copyright">© 2025 Wohngut – Alle Rechte vorbehalten.</p>
+</footer>
+
+  <script src = "index.js"></script>
+</body>
+</html>
