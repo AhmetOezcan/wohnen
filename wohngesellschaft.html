@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wohngesellschaft - Wohnungsangebote</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        #einkommensabhangig-preis {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #einkommensabhangig-preis label {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        #einkommensabhangig-preis input {
+            padding: 0.8rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            width: 150px;
+            margin-right: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #einkommensabhangig-preis button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #einkommensabhangig-preis button:hover {
+            background-color: #27ae60;
+        }
+
+        #einkommensabhangig-preis button:active {
+            transform: translateY(1px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .apartment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .apartment-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .apartment-image {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .apartment-details {
+            padding: 1rem;
+        }
+
+        .apartment-price {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .apartment-features {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Wohngesellschaft</h1>
+            <p>Ihre vertrauenswürdige Wohnungsgesellschaft</p>
+        </div>
+    </header>
+
+    <section id="einkommensabhangig-preis">
+        <label for="einkommensabhangig">Punkte eingeben und Wunder erleben!</label>
+        <input required type="number" id="einkommensabhangig" name="einkommensabhangig" min="0" max="500" placeholder="Punkte eingeben">
+        <button onclick="berechnePreise()">Preise berechnen</button>
+    </section>
+
+    <main>
+        <div class="apartment-grid">
+            <div class="apartment-card">
+                <div class="apartment-image">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="2-Zimmer Wohnung" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="apartment-details">
+                    <h3>2-Zimmer Wohnung</h3>
+                    <p class="apartment-price">950 € / Monat</p>
+                    <div class="apartment-features">
+                        <p>75 m² • 2 Zimmer • 1 Bad</p>
+                        <p>Salzburg, Neustadt</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apartment-card">
+                <div class="apartment-image">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2" alt="3-Zimmer Wohnung" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="apartment-details">
+                    <h3>3-Zimmer Wohnung</h3>
+                    <p class="apartment-price">1.350 € / Monat</p>
+                    <div class="apartment-features">
+                        <p>95 m² • 3 Zimmer • 2 Bäder</p>
+                        <p>Salzburg, Riedenburg</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apartment-card">
+                <div class="apartment-image">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688" alt="1-Zimmer Wohnung" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="apartment-details">
+                    <h3>1-Zimmer Wohnung</h3>
+                    <p class="apartment-price">750 € / Monat</p>
+                    <div class="apartment-features">
+                        <p>45 m² • 1 Zimmer • 1 Bad</p>
+                        <p>Salzburg, Elisabeth-Vorstadt</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apartment-card">
+                <div class="apartment-image">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c" alt="4-Zimmer Wohnung" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="apartment-details">
+                    <h3>4-Zimmer Wohnung</h3>
+                    <p class="apartment-price">1.950 € / Monat</p>
+                    <div class="apartment-features">
+                        <p>120 m² • 4 Zimmer • 2 Bäder</p>
+                        <p>Salzburg, Aigen</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apartment-card">
+                <div class="apartment-image">
+                    <img src="https://images.unsplash.com/photo-1560185007-5f0bb1866cab" alt="Studio Wohnung" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="apartment-details">
+                    <h3>Studio Wohnung</h3>
+                    <p class="apartment-price">650 € / Monat</p>
+                    <div class="apartment-features">
+                        <p>35 m² • 1 Zimmer • 1 Bad</p>
+                        <p>Salzburg, Altstadt</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apartment-card">
+                <div class="apartment-image">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Penthouse" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="apartment-details">
+                    <h3>Penthouse</h3>
+                    <p class="apartment-price">2.800 € / Monat</p>
+                    <div class="apartment-features">
+                        <p>150 m² • 5 Zimmer • 2 Bäder</p>
+                        <p>Salzburg, Mönchsberg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Original prices stored as data attributes
+        const originalPrices = {
+            '2-zimmer': 950,
+            '3-zimmer': 1350,
+            '1-zimmer': 750,
+            '4-zimmer': 1950,
+            'studio': 650,
+            'penthouse': 2800
+        };
+
+        function berechnePreise() {
+            const punkte = parseInt(document.getElementById('einkommensabhangig').value);
+            
+            // Validate input
+            if (isNaN(punkte) || punkte < 0 || punkte > 500) {
+                alert('Bitte geben Sie eine gültige Punktzahl zwischen 0 und 500 ein.');
+                return;
+            }
+
+            // Calculate price adjustment based on points
+            let priceAdjustment;
+            if (punkte < 50) {
+                // Increase prices when points are below 50
+                // Maximum increase of 20% at 0 points
+                priceAdjustment = ((50 - punkte) / 50) * 60;
+            } else {
+                // Decrease prices when points are 50 or above
+                // Maximum discount of 40% at 500 points
+                priceAdjustment = -((punkte - 50) / 450) * 100;
+            }
+
+            // Update prices for each apartment
+            const apartments = document.querySelectorAll('.apartment-card');
+            apartments.forEach(apartment => {
+                const title = apartment.querySelector('h3').textContent.toLowerCase();
+                let originalPrice;
+                
+                // Find matching original price
+                if (title.includes('2-zimmer')) originalPrice = originalPrices['2-zimmer'];
+                else if (title.includes('3-zimmer')) originalPrice = originalPrices['3-zimmer'];
+                else if (title.includes('1-zimmer')) originalPrice = originalPrices['1-zimmer'];
+                else if (title.includes('4-zimmer')) originalPrice = originalPrices['4-zimmer'];
+                else if (title.includes('studio')) originalPrice = originalPrices['studio'];
+                else if (title.includes('penthouse')) originalPrice = originalPrices['penthouse'];
+
+                // Calculate new price
+                const newPrice = Math.round(originalPrice * (1 + priceAdjustment / 100));
+                
+                // Update price display
+                const priceElement = apartment.querySelector('.apartment-price');
+                if (priceAdjustment !== 0) {
+                    priceElement.textContent = `${newPrice} € / Monat (Ursprungspreis: ${originalPrice} €)`;
+                } else {
+                    priceElement.textContent = `${originalPrice} € / Monat`;
+                }
+                
+                // Add visual feedback
+                priceElement.style.color = priceAdjustment > 0 ? '#e74c3c' : (priceAdjustment < 0 ? '#2ecc71' : '#2c3e50');
+                setTimeout(() => {
+                    priceElement.style.color = '#2c3e50';
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>

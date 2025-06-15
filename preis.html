@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkliste</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    fieldset {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+
+    legend {
+      font-weight: 800;
+      color: #2c3e50;
+      padding: 0 10px;
+      font-size: 18px;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+      color: #444;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin: 2px 0;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    p {
+      margin: 5px 0;
+      color: #666;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 20px auto;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Style for radio and checkbox groups */
+    .radio-group,
+    .checkbox-group {
+      margin: 5px 0;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      section {
+        padding: 15px;
+      }
+
+      fieldset {
+        padding: 15px;
+      }
+    }
+
+    /* Add styles for the total points display */
+    #totalPoints {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #2c3e50;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .subsection-heading {
+      font-weight: bold;
+      color: #000;
+      margin: 15px 0 10px 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h2>Wohnnungsvergaberichtlinien Punktbewertung</h2>
+    <form id="pointsForm">
+      <fieldset>
+        <legend>1. Aktuelle Wohnsituation</legend>
+
+        <!-- Überbelag -->
+        <p class="subsection-heading">Überbelag – Anzahl fehlender Zimmer:</p>
+        <input type="number" id="fehlendeZimmer" name="fehlendeZimmer" min="0">
+        <p>Punkte: 10 pro fehlendem Zimmer</p>
+
+        <!-- Wohnungstyp -->
+        <p class="subsection-heading">Bewertung der Wohnung:</p>
+        <label><input type="radio" name="wohnungstyp" value="7"> Typ B (7 Punkte)</label><br>
+        <label><input type="radio" name="wohnungstyp" value="14"> Typ C (14 Punkte)</label><br>
+        <label><input type="radio" name="wohnungstyp" value="21"> Typ D (21 Punkte)</label>
+
+        <!-- Wohnkostenanteil -->
+        <p class="subsection-heading">Wohnung zu teuer (inkl. BK, HK, Steuern, Wohnbeihilfe):</p>
+        <label><input type="radio" name="wohnkosten" value="15"> Über 45 % vom Einkommen (15 Punkte)</label><br>
+        <label><input type="radio" name="wohnkosten" value="10"> 40–45 % vom Einkommen (10 Punkte)</label><br>
+        <label><input type="radio" name="wohnkosten" value="5"> 33–40 % vom Einkommen (5 Punkte)</label>
+
+        <!-- Schichtarbeit -->
+        <p class="subsection-heading">Schichtarbeit:</p>
+        <label><input type="checkbox" name="ruheraum" value="10"> Fehlender Ruheraum (10 Punkte)</label>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Persönliche Voraussetzungen</legend>
+
+        <!-- Einkommen -->
+        <p class="subsection-heading">Einkommen (Punkte laut <a href="./einkommen.png" target="_blank">Beilage</a>):</p>
+        <input type="number" id="einkommen" name="einkommen" min="0" max="100"><br><br>
+
+        <!-- Alleinerziehend -->
+        <p class="subsection-heading">Alleinerziehend:</p>
+        <label><input type="checkbox" name="alleinerziehend" value="12"> Alleinerziehend (12 Punkte)</label><br><br>
+
+        <!-- Schwangerschaft -->
+        <p class="subsection-heading">Schwangerschaft:</p>
+        <label><input type="checkbox" name="schwangerschaft" value="6"> Schwangerschaft ab 4. Monat mit Nachweis (6 Punkte)</label><br><br>
+
+        <!-- Hausstandsgründung -->
+        <p class="subsection-heading">Hausstandsgründung:</p>
+        <label><input type="checkbox" name="hausstand" value="10"> Hausstandsgründung unter 30 Jahren (10 Punkte)</label><br><br>
+
+        <!-- Wohnungswechsel aus gesundheitlichen Gründen -->
+        <p class="subsection-heading">Wohnungswechsel aus gesundheitlichen Gründen:</p>
+        <label><input type="radio" name="gesundheit" value="8"> Stufe 1 (8 Punkte)</label><br>
+        <label><input type="radio" name="gesundheit" value="16"> Stufe 2 – kein Verlassen/Betreten möglich (16 Punkte)</label><br><br>
+
+        <!-- Behinderung -->
+        <p class="subsection-heading">Grad der Behinderung:</p>
+        <label><input type="radio" name="behinderung" value="4"> 50–60 % (4 Punkte)</label><br>
+        <label><input type="radio" name="behinderung" value="8"> 70–80 % (8 Punkte)</label><br>
+        <label><input type="radio" name="behinderung" value="12"> 90–100 % (12 Punkte)</label><br><br>
+
+        <!-- Pflegegeld -->
+        <p class="subsection-heading">Pflegestufe:</p>
+        <label><input type="radio" name="pflege" value="3"> Stufe 3 (3 Punkte)</label><br>
+        <label><input type="radio" name="pflege" value="4"> Stufe 4 (4 Punkte)</label><br>
+        <label><input type="radio" name="pflege" value="5"> Stufe 5 (5 Punkte)</label><br>
+        <label><input type="radio" name="pflege" value="6"> Stufe 6 (6 Punkte)</label><br>
+        <label><input type="radio" name="pflege" value="7"> Stufe 7 (7 Punkte)</label><br><br>
+
+        <!-- Hauptwohnsitz -->
+        <p class="subsection-heading">Dauer des Hauptwohnsitzes:</p>
+        <label><input type="radio" name="wohnsitz" value="5"> 10–15 Jahre (5 Punkte)</label><br>
+        <label><input type="radio" name="wohnsitz" value="10"> 15–20 Jahre (10 Punkte)</label><br>
+        <label><input type="radio" name="wohnsitz" value="15"> Über 20 Jahre (15 Punkte)</label><br><br>
+
+        <!-- Beschäftigung -->
+        <p class="subsection-heading">Durchgehende Beschäftigung:</p>
+        <label><input type="radio" name="beschaeftigung" value="3"> 3–5 Jahre (3 Punkte)</label><br>
+        <label><input type="radio" name="beschaeftigung" value="6"> 5–10 Jahre (6 Punkte)</label><br>
+        <label><input type="radio" name="beschaeftigung" value="9"> Über 10 Jahre (9 Punkte)</label><br><br>
+
+        <!-- Lehrlingsbonus -->
+        <p class="subsection-heading">Lehrlingsbonus:</p>
+        <label><input type="checkbox" name="lehrlingsbonus" value="6"> Lehrlingsbonus für mitziehende Kinder (6 Punkte)</label><br>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Zusatzpunkte</legend>
+
+        <!-- Deutschkenntnisse -->
+        <p class="subsection-heading">Anzahl volljähriger Personen mit Nachweis über Deutschkenntnisse:</p>
+        <input type="number" id="deutschkenntnisse" name="deutschkenntnisse" min="0">
+        <p>Punkte: 11 pro Person</p><br>
+
+        <!-- Ehrenamt -->
+        <p class="subsection-heading">Ehrenamtliche Tätigkeit:</p>
+        <label><input type="checkbox" name="ehrenamt" value="11">
+          Mind. 2 Jahre aktive ehrenamtliche Tätigkeit mit Nachweis (11 Punkte)
+        </label><br><br>
+
+        <!-- Wartezeit -->
+        <p class="subsection-heading">Wartezeit in Jahren:</p>
+        <input type="number" id="wartezeit" name="wartezeit" min="0">
+        <p>Punkte: 7 pro Jahr ab dem 7. Jahr</p><br>
+
+        <!-- Wiedervergabefähige Wohnung -->
+        <p class="subsection-heading">Wiedervergabefähige Wohnung:</p>
+        <label><input type="checkbox" name="wiedervergabe" value="7">
+          Rückgabe einer wiedervergabefähigen Wohnung (7 Punkte)
+        </label>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>4. Notlagen</legend>
+
+        <p class="subsection-heading">Anstehender Wohnungsverlust:</p>
+        <label>
+          <input type="checkbox" name="wohnungsverlust" value="10">
+          Anstehender Wohnungsverlust in den nächsten 3 Monaten (10 Punkte)
+        </label><br><br>
+
+        <p class="subsection-heading">Scheidung:</p>
+        <label>
+          <input type="checkbox" name="scheidung" value="10">
+          Wohnung muss wegen Scheidung geräumt werden (10 Punkte)
+        </label><br><br>
+
+        <p class="subsection-heading">Trennung mit Kindern:</p>
+        <label>
+          <input type="checkbox" name="trennungKinder" value="10">
+          Trennung mit Kindern – neue Wohnung benötigt (10 Punkte)
+        </label><br><br>
+
+        <p class="subsection-heading">Notunterkunft:</p>
+        <label>
+          <input type="checkbox" name="notunterkunft" value="20">
+          Aufenthalt in einer Notunterkunft mit dringendem Bedarf (20 Punkte)
+        </label><br><br>
+
+        <p class="subsection-heading">Pensionszimmer:</p>
+        <label>
+          <input type="checkbox" name="pensionszimmer" value="20">
+          Aktueller Aufenthalt in einem Pensionszimmer (20 Punkte)
+        </label><br><br>
+
+        <p class="subsection-heading">Obdachlosigkeit:</p>
+        <label>
+          <input type="checkbox" name="obdachlos" value="30">
+          Obdachlosigkeit (30 Punkte)
+        </label>
+
+      </fieldset>
+
+
+    </form>
+    <div id="totalPoints">Gesamtpunkte: 0</div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('pointsForm');
+      const totalPointsDisplay = document.getElementById('totalPoints');
+      
+      function calculateTotalPoints() {
+        let total = 0;
+        
+        // Überbelag
+        const fehlendeZimmer = parseInt(document.getElementById('fehlendeZimmer').value) || 0;
+        total += fehlendeZimmer * 10;
+        
+        // Wohnungstyp
+        const wohnungstyp = document.querySelector('input[name="wohnungstyp"]:checked');
+        if (wohnungstyp) {
+          total += parseInt(wohnungstyp.value);
+        }
+        
+        // Wohnkosten
+        const wohnkosten = document.querySelector('input[name="wohnkosten"]:checked');
+        if (wohnkosten) {
+          total += parseInt(wohnkosten.value);
+        }
+        
+        // Ruheraum
+        const ruheraum = document.querySelector('input[name="ruheraum"]:checked');
+        if (ruheraum) {
+          total += parseInt(ruheraum.value);
+        }
+        
+        // Einkommen
+        const einkommen = parseFloat(document.getElementById('einkommen').value) || 0;
+        total += getEinkommenPunkte(einkommen);
+
+        if (einkommen == 0) {
+          total = 0; }
+
+// Funktion zur Umrechnung von Einkommen in Punkte gemäß Tabelle
+      function getEinkommenPunkte(einkommen) {
+      const einkommenTabelle = [
+    [2392.00, 0], [2379.64, 1], [2367.28, 2], [2354.92, 3], [2342.55, 4], [2330.19, 5], [2317.83, 6],
+    [2305.47, 7], [2293.11, 8], [2280.75, 9], [2268.38, 10], [2256.02, 11], [2243.66, 12], [2231.30, 13],
+    [2218.94, 14], [2206.58, 15], [2194.21, 16], [2181.85, 17], [2169.49, 18], [2157.13, 19], [2144.77, 20],
+    [2132.41, 21], [2120.04, 22], [2107.68, 23], [2095.32, 24], [2082.96, 25], [2070.60, 26], [2058.24, 27],
+    [2045.88, 28], [2033.51, 29], [2021.15, 30], [2008.79, 31], [1996.43, 32], [1984.07, 33], [1971.71, 34],
+    [1959.34, 35], [1946.98, 36], [1934.62, 37], [1922.26, 38], [1909.90, 39], [1897.54, 40], [1885.17, 41],
+    [1872.81, 42], [1860.45, 43], [1848.09, 44], [1835.73, 45], [1823.37, 46], [1811.00, 47], [1798.64, 48],
+    [1786.28, 49], [1773.92, 50], [1761.56, 51], [1749.20, 52], [1736.84, 53], [1724.47, 54], [1712.11, 55],
+    [1699.75, 56], [1687.39, 57], [1675.03, 58], [1662.67, 59], [1650.30, 60], [1637.94, 61], [1625.58, 62],
+    [1613.22, 63], [1600.86, 64], [1588.50, 65], [1576.13, 66], [1563.77, 67], [1551.41, 68], [1539.05, 69],
+    [1526.69, 70], [1514.33, 71], [1501.96, 72], [1489.60, 73], [1477.24, 74], [1464.88, 75], [1452.52, 76],
+    [1440.16, 77], [1427.80, 78], [1415.43, 79], [1403.07, 80], [1390.71, 81], [1378.35, 82], [1365.99, 83],
+    [1353.63, 84], [1341.26, 85], [1328.90, 86], [1316.54, 87], [1304.18, 88], [1291.82, 89], [1279.46, 90],
+    [1267.09, 91], [1254.73, 92], [1242.37, 93], [1230.01, 94], [1217.65, 95], [1205.29, 96], [1192.92, 97],
+    [1180.56, 98], [1168.20, 99], [1155.84, 100]
+  ];
+
+  for (let i = 0; i < einkommenTabelle.length; i++) {
+    if (einkommen >= einkommenTabelle[i][0]) {
+      return einkommenTabelle[i][1];
+    }
+  }
+  return 100; // falls Einkommen < niedrigster Wert
+}
+        
+        // Alleinerziehend
+        const alleinerziehend = document.querySelector('input[name="alleinerziehend"]:checked');
+        if (alleinerziehend) {
+          total += parseInt(alleinerziehend.value);
+        }
+        
+        // Schwangerschaft
+        const schwangerschaft = document.querySelector('input[name="schwangerschaft"]:checked');
+        if (schwangerschaft) {
+          total += parseInt(schwangerschaft.value);
+        }
+        
+        // Hausstandsgründung
+        const hausstand = document.querySelector('input[name="hausstand"]:checked');
+        if (hausstand) {
+          total += parseInt(hausstand.value);
+        }
+        
+        // Gesundheit
+        const gesundheit = document.querySelector('input[name="gesundheit"]:checked');
+        if (gesundheit) {
+          total += parseInt(gesundheit.value);
+        }
+        
+        // Behinderung
+        const behinderung = document.querySelector('input[name="behinderung"]:checked');
+        if (behinderung) {
+          total += parseInt(behinderung.value);
+        }
+        
+        // Pflege
+        const pflege = document.querySelector('input[name="pflege"]:checked');
+        if (pflege) {
+          total += parseInt(pflege.value);
+        }
+        
+        // Wohnsitz
+        const wohnsitz = document.querySelector('input[name="wohnsitz"]:checked');
+        if (wohnsitz) {
+          total += parseInt(wohnsitz.value);
+        }
+        
+        // Beschäftigung
+        const beschaeftigung = document.querySelector('input[name="beschaeftigung"]:checked');
+        if (beschaeftigung) {
+          total += parseInt(beschaeftigung.value);
+        }
+        
+        // Lehrlingsbonus
+        const lehrlingsbonus = document.querySelector('input[name="lehrlingsbonus"]:checked');
+        if (lehrlingsbonus) {
+          total += parseInt(lehrlingsbonus.value);
+        }
+        
+        // Deutschkenntnisse
+        const deutschkenntnisse = parseInt(document.getElementById('deutschkenntnisse').value) || 0;
+        total += deutschkenntnisse * 11;
+        
+        // Ehrenamt
+        const ehrenamt = document.querySelector('input[name="ehrenamt"]:checked');
+        if (ehrenamt) {
+          total += parseInt(ehrenamt.value);
+        }
+        
+        // Wartezeit
+        const wartezeit = parseInt(document.getElementById('wartezeit').value) || 0;
+        if (wartezeit >= 7) {
+          total += (wartezeit - 6) * 7;
+        }
+        
+        // Wiedervergabe
+        const wiedervergabe = document.querySelector('input[name="wiedervergabe"]:checked');
+        if (wiedervergabe) {
+          total += parseInt(wiedervergabe.value);
+        }
+        
+        // Notlagen
+        const notlagen = [
+          'wohnungsverlust',
+          'scheidung',
+          'trennungKinder',
+          'notunterkunft',
+          'pensionszimmer',
+          'obdachlos'
+        ];
+        
+        notlagen.forEach(notlage => {
+          const element = document.querySelector(`input[name="${notlage}"]:checked`);
+          if (element) {
+            total += parseInt(element.value);
+          }
+        });
+        
+        totalPointsDisplay.textContent = `Gesamtpunkte: ${total}`;
+      }
+      
+      // Add event listeners to all form elements
+      const formElements = form.querySelectorAll('input');
+      formElements.forEach(element => {
+        element.addEventListener('change', calculateTotalPoints);
+        element.addEventListener('input', calculateTotalPoints);
+      });
+      
+      // Initial calculation
+      calculateTotalPoints();
+    });
+  </script>
+</body>
+</html>
